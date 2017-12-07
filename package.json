@@ -10,7 +10,7 @@
     "vscode": "^1.18.0"
   },
   "categories": ["Other"],
-  "keywords": ["toggler", "toggle", "words", "symbols", "cursor", "selection"],
+  "keywords": ["toggle", "words", "symbols", "cursor", "selection"],
   "activationEvents": ["onCommand:extension.toggle"],
   "icon": "images/icon.png",
   "repository": {
