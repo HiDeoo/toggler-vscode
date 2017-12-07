@@ -26,6 +26,18 @@
     "color": "#d1d8ea",
     "theme": "dark"
   },
+  "badges": [
+    {
+      "url": "https://travis-ci.org/HiDeoo/toggler-vscode.svg?branch=master",
+      "href": "https://travis-ci.org/HiDeoo/toggler-vscode",
+      "description": "macOS & Linux Build Status"
+    },
+    {
+      "url": "https://david-dm.org/HiDeoo/toggler-vscode.svg",
+      "href": "https://david-dm.org/HiDeoo/toggler-vscode",
+      "description": "Dependency Status"
+    }
+  ],
   "main": "./src/toggler",
   "contributes": {
     "commands": [

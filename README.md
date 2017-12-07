@@ -1,4 +1,7 @@
-# Toggler Package
+# Toggler Extension
+
+[![macOS & Linux Build Status](https://travis-ci.org/HiDeoo/toggler-vscode.svg?branch=master)](https://travis-ci.org/HiDeoo/toggler-vscode)
+[![Dependency Status](https://david-dm.org/HiDeoo/toggler-vscode.svg)](https://david-dm.org/HiDeoo/toggler-vscode)
 
 Toggle words and symbols in VS Code using a user defined configuration.
 
