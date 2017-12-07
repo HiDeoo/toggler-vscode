@@ -7,7 +7,7 @@ Toggle words and symbols in VS Code using a user defined configuration.
 
 This is the **official** port of the [Atom package](https://atom.io/packages/toggler) of the same name.
 
-![Screenshot of the Toggler Extension](https://i.imgur.com/I2vuYqR.gif)
+![Screenshot of the Toggler Extension](https://i.imgur.com/8ffMj84.gif)
 
 [Changelog](https://github.com/HiDeoo/toggler-vscode/blob/master/CHANGELOG.md)
 
