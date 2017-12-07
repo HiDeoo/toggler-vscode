@@ -1,36 +1,83 @@
 {
-    "name": "toggler",
-    "displayName": "Toggler",
-    "description": "Toggle words and symbols",
-    "version": "0.0.1",
-    "publisher": "hideoo",
-    "engines": {
-        "vscode": "^1.18.0"
-    },
-    "categories": [
-        "Other"
+  "name": "toggler",
+  "displayName": "Toggler",
+  "description": "Toggle words and symbols",
+  "version": "0.0.1",
+  "publisher": "hideoo",
+  "author": "HiDeoo",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "engines": {
+    "vscode": "^1.18.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["toggler", "toggle", "words", "symbols", "cursor", "selection"],
+  "activationEvents": ["onCommand:extension.toggle"],
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HiDeoo/toggler-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/HiDeoo/toggler-vscode/issues"
+  },
+  "contributors": [],
+  "homepage": "https://github.com/HiDeoo/toggler-vscode",
+  "galleryBanner": {
+    "color": "#d1d8ea",
+    "theme": "dark"
+  },
+  "main": "./src/toggler",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.toggle",
+        "title": "Toggle"
+      }
     ],
-    "activationEvents": [
-        "onCommand:extension.sayHello"
+    "keybindings": [
+      {
+        "command": "extension.toggle",
+        "key": "alt+r",
+        "mac": "ctrl+r",
+        "when": "editorFocus"
+      }
     ],
-    "main": "./extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "extension.sayHello",
-                "title": "Hello World"
-            }
-        ]
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "extension.toggle",
+          "when": "editorFocus"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "extension.toggle",
+          "group": "1_modification",
+          "when": "editorFocus"
+        }
+      ]
     },
-    "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
-        "eslint": "^4.6.1",
-        "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
+    "configuration": {
+      "type": "object",
+      "title": "Toggler Configuration",
+      "properties": {
+        "toggler.toggles": {
+          "type": "array",
+          "default": [["absolute", "relative"], ["high", "low"]],
+          "description": "Custom toggles."
+        }
+      }
     }
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.6",
+    "eslint": "^4.6.1",
+    "@types/node": "^7.0.43",
+    "@types/mocha": "^2.2.42"
+  }
 }

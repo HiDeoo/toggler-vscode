@@ -1,50 +1,3 @@
-# Toggler Package
-
-Toggle words and symbols in VS Code using a user defined configuration.
-
-This is the **official** port of the [Atom package](https://atom.io/packages/toggler) of the same name.
-
-![Screenshot of the Toggler Extension]https://i.imgur.com/I2vuYqR.gif)
-
-[Changelog](https://github.com/HiDeoo/toggler-vscode/blob/master/CHANGELOG.md)
-
-## Features
-
-As none of the existing words toggling package were fitting my needs, I decided to write my own with the following features:
-
-  * **Easily user customizable.**
-  * Maintain word case.
-  * Multiple toggles support.
-  * Multiple cursors support.
-  * Multiple selections support.
-  * No dependency.
-
-## Usage
-
-Set your cursor on a word or select a word and press the associated keybinding (<kbd>Ctrl</kbd>+<kbd>r</kbd> by default on macOS, <kbd>Alt</kbd>+<kbd>r</kbd> on Windows and Linux).
-
-You can also use the VS Code Command Palette and choose the `Toggle` command, or use the `Toggle` action in a context menu.
-
-## Configuration.
-
-You can customize the default configuration directly in your VS Code settings:
-
-```
-"toggler.toggles": [
-    [
-      "custom_1",
-      "custom_2"
-    ],
-    [
-      "custom_3",
-      "custom_4"
-    ]
-  ]
-```
-
-Toggler is bundled with these default toggles:
-
-```
 [
   ["absolute", "relative"],
   ["high", "low"],
@@ -106,15 +59,15 @@ Toggler is bundled with these default toggles:
   ["Math.min", "Math.max"],
   ["min", "max"],
 
-  ["activate", "deactivate"],
+  ["deactivate", "activate"],
   ["address", "port"],
   ["add", "remove"],
-  ["available", "unavailable"],
+  ["unavailable", "available"],
   ["background", "foreground"],
   ["before", "after"],
   ["client", "server"],
-  ["connected", "disconnected"],
-  ["connect", "disconnect"],
+  ["disconnected", "connected"],
+  ["disconnect", "connect"],
   ["development", "production"],
   ["dev", "prod"],
   ["drag", "drop"],
@@ -123,9 +76,10 @@ Toggler is bundled with these default toggles:
   ["from", "to"],
   ["get", "set"],
   ["input", "output"],
-  ["install", "uninstall"],
+  ["uninstall", "install"],
+  ["all", "each", "only"],
   ["key", "value"],
-  ["load", "unload"],
+  ["unload", "load"],
   ["minor", "major"],
   ["online", "offline"],
   ["open", "close"],
@@ -141,7 +95,7 @@ Toggler is bundled with these default toggles:
   ["show", "hide"],
   ["source", "destination"],
   ["start", "stop"],
-  ["valid", "invalid"],
+  ["invalid", "valid"],
   ["visible", "hidden"],
   ["width", "height"],
   ["x", "y"],
@@ -149,6 +103,7 @@ Toggler is bundled with these default toggles:
   ["0", "1"],
   ["enabled", "disabled"],
   ["enable", "disable"],
+  ["if", "else"],
   ["on", "off"],
   ["true", "false"],
   ["yes", "no"],
@@ -178,8 +133,3 @@ Toggler is bundled with these default toggles:
   ["===", "!=="],
   ["==", "!="]
 ]
-```
-
-## Copyright and license
-
-Copyright (c) 2017 HiDeoo. Code released under the [MIT license](https://github.com/HiDeoo/toggler-vscode/blob/master/LICENSE.md).
