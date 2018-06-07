@@ -52,11 +52,9 @@ Toggler is bundled with these default toggles:
   ["absolute", "relative"],
   ["high", "low"],
   ["horizontal", "vertical"],
-  ["in", "out"],
   ["inner", "outer"],
   ["left", "right"],
   ["top", "bottom"],
-  ["up", "down"],
 
   ["black", "white"],
   ["gray", "maroon", "red", "purple", "fuchsia", "green", "yellow", "blue", "aqua"],
@@ -162,6 +160,9 @@ Toggler is bundled with these default toggles:
   ["ol", "ul"],
   ["tr", "td"],
 
+  ["in", "out"],
+  ["up", "down"],
+
   ["[]", "{}"],
   ["(", ")"],
   ["[", "]"],
@@ -185,4 +186,4 @@ Toggler is bundled with these default toggles:
 
 ## Copyright and license
 
-Copyright (c) 2017 HiDeoo. Code released under the [MIT license](https://github.com/HiDeoo/toggler-vscode/blob/master/LICENSE.md).
+Copyright (c) 2018 HiDeoo. Code released under the [MIT license](https://github.com/HiDeoo/toggler-vscode/blob/master/LICENSE.md).

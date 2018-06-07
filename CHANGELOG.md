@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleasaed
+
+ - Fix some default toggles order.
+
 ## 0.0.3
 
 - Fix changelog versionning.

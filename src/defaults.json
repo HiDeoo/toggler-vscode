@@ -2,11 +2,9 @@
   ["absolute", "relative"],
   ["high", "low"],
   ["horizontal", "vertical"],
-  ["in", "out"],
   ["inner", "outer"],
   ["left", "right"],
   ["top", "bottom"],
-  ["up", "down"],
 
   ["black", "white"],
   ["gray", "maroon", "red", "purple", "fuchsia", "green", "yellow", "blue", "aqua"],
@@ -113,6 +111,9 @@
   ["header", "footer"],
   ["ol", "ul"],
   ["tr", "td"],
+
+  ["in", "out"],
+  ["up", "down"],
 
   ["[]", "{}"],
   ["(", ")"],
