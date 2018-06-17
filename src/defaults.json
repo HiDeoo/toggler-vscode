@@ -44,7 +44,7 @@
   ["mouseenter", "mouseleave"],
   ["touchstart", "touchend"],
 
-  ["componentDidMount", "componentWillUnmount"],
+  ["componentWillMount", "componentWillUnmount"],
   ["getState", "setState"],
   ["container", "component"],
 
