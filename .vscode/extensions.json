@@ -1,3 +1,4 @@
+// http://go.microsoft.com/fwlink/?LinkId=827846
 {
 	"recommendations": [
 		"dbaeumer.vscode-eslint"
