@@ -1,0 +1,26 @@
+name: integration
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 8.x
+
+    - name: Install dependencies
+      run: yarn
+
+    - name: Build, lint & test
+      uses: GabrielBB/xvfb-action@v1.0
+      with:
+        run: yarn test
