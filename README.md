@@ -1,6 +1,6 @@
 # Toggler Extension
 
-[![macOS & Linux Build Status](https://travis-ci.org/HiDeoo/toggler-vscode.svg?branch=master)](https://travis-ci.org/HiDeoo/toggler-vscode)
+[![integration](https://github.com/HiDeoo/toggler-vscode/workflows/integration/badge.svg)](https://github.com/HiDeoo/toggler-vscode/actions?query=workflow%3Aintegration)
 [![Dependency Status](https://david-dm.org/HiDeoo/toggler-vscode.svg)](https://david-dm.org/HiDeoo/toggler-vscode)
 
 Toggle words and symbols in VS Code using a user defined configuration.
@@ -15,12 +15,12 @@ This is the **official** port of the [Atom package](https://atom.io/packages/tog
 
 As none of the existing words toggling package were fitting my needs, I decided to write my own with the following features:
 
-  * **Easily user customizable.**
-  * Maintain word case.
-  * Multiple toggles support.
-  * Multiple cursors support.
-  * Multiple selections support.
-  * No dependency.
+- **Easily user customizable.**
+- Maintain word case.
+- Multiple toggles support.
+- Multiple cursors support.
+- Multiple selections support.
+- No dependency.
 
 ## Usage
 
