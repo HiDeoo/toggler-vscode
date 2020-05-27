@@ -88,7 +88,7 @@
     },
     "configuration": {
       "type": "object",
-      "title": "Toggler Configuration",
+      "title": "Toggler",
       "properties": {
         "toggler.toggles": {
           "type": "array",
