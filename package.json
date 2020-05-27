@@ -68,7 +68,7 @@
       "commandPalette": [
         {
           "command": "extension.toggle",
-          "when": "editorFocus"
+          "when": "editorIsOpen"
         }
       ],
       "editor/context": [

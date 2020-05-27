@@ -5,6 +5,7 @@
 ### 🐛 Bug Fix
 
 - Fix some default toggles order.
+- Fix an issue with the _Toggle_ command not appearing in the Command Palette.
 
 ### ⚙️ Internal
 
