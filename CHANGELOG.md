@@ -1,8 +1,14 @@
 # Change Log
 
-## Unreleasaed
+## Unreleased
 
- - Fix some default toggles order.
+### 🐛 Bug Fix
+
+- Fix some default toggles order.
+
+### ⚙️ Internal
+
+- Complete TypeScript rewrite with more reliable tests.
 
 ## 0.0.3
 
