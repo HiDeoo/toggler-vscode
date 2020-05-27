@@ -5,6 +5,7 @@
 ### 🚀 New Feature
 
 - Add a new _Customize toggles_ command in the Command Palette to quickly edit custom toggles.
+- Customizing toggles no longer requires to reload the VSCode window for the changes to take effect.
 
 ### 🐛 Bug Fix
 

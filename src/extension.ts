@@ -33,6 +33,9 @@ export function activate(context: ExtensionContext) {
     }),
     commands.registerCommand(TogglerCommands.Settings, () => {
       commands.executeCommand('workbench.action.openSettings', '@ext:hideoo.toggler')
+    }),
+    workspace.onDidChangeConfiguration(() => {
+      loadConfiguration(true)
     })
   )
 }
@@ -46,9 +49,10 @@ export function deactivate() {
 
 /**
  * Loads the configuration.
+ * @param reload - Defines if the configuration should be reloaded or not.
  */
-export function loadConfiguration() {
-  if (configuration) {
+export function loadConfiguration(reload = false) {
+  if (configuration && !reload) {
     return
   }
 
