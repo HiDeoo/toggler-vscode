@@ -1,6 +1,6 @@
 import { commands, Position, Selection, window } from 'vscode'
 
-import { TogglerCommand } from '../../extension'
+import { TogglerCommands } from '../../extension'
 import { withEditor, assertDocumentTextEqual } from '../utils'
 
 suite('Toggler Test Suite', () => {
@@ -8,15 +8,15 @@ suite('Toggler Test Suite', () => {
 
   test('should replace known words', () => {
     return withEditor('gray', async (document) => {
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'maroon')
 
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'red')
 
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'purple')
     })
@@ -26,7 +26,7 @@ suite('Toggler Test Suite', () => {
     const unknownWord = 'sdjflksdjfsjd'
 
     return withEditor(unknownWord, async (document) => {
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, unknownWord)
     })
@@ -34,7 +34,7 @@ suite('Toggler Test Suite', () => {
 
   test('should replace and respect lowercase', () => {
     return withEditor('true', async (document) => {
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'false')
     })
@@ -42,7 +42,7 @@ suite('Toggler Test Suite', () => {
 
   test('should replace and respect uppercase', () => {
     return withEditor('TRUE', async (document) => {
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'FALSE')
     })
@@ -50,7 +50,7 @@ suite('Toggler Test Suite', () => {
 
   test('should replace and respect capitalization', () => {
     return withEditor('True', async (document) => {
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'False')
     })
@@ -64,7 +64,7 @@ suite('Toggler Test Suite', () => {
         const position = new Position(0, character)
         editor.selection = new Selection(position, position)
 
-        await commands.executeCommand(TogglerCommand)
+        await commands.executeCommand(TogglerCommands.Toggle)
 
         assertDocumentTextEqual(document, 'false')
       })
@@ -75,7 +75,7 @@ suite('Toggler Test Suite', () => {
     return withEditor('true', async (document, editor) => {
       editor.selection = new Selection(new Position(0, 0), new Position(0, 4))
 
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'false')
     })
@@ -85,7 +85,7 @@ suite('Toggler Test Suite', () => {
     return withEditor('true', async (document, editor) => {
       editor.selection = new Selection(new Position(0, 0), new Position(0, 2))
 
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'tdue')
     })
@@ -96,13 +96,13 @@ suite('Toggler Test Suite', () => {
       const selection = new Selection(new Position(0, 2), new Position(0, 2))
       editor.selection = selection
 
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'test.only')
 
       editor.selection = selection
 
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'test')
     })
@@ -110,13 +110,13 @@ suite('Toggler Test Suite', () => {
 
   test('should properly guess the word to replace when the cursor is around the word', () => {
     return withEditor('test', async (document, editor) => {
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'test.only')
 
       editor.selection = new Selection(new Position(0, 9), new Position(0, 9))
 
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'test')
     })
@@ -126,7 +126,7 @@ suite('Toggler Test Suite', () => {
     return withEditor('true', async (document, editor) => {
       editor.selection = new Selection(new Position(0, 5), new Position(0, 5))
 
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, 'true')
     })
@@ -134,7 +134,7 @@ suite('Toggler Test Suite', () => {
 
   test('should replace symbols', () => {
     return withEditor("'", async (document) => {
-      await commands.executeCommand(TogglerCommand)
+      await commands.executeCommand(TogglerCommands.Toggle)
 
       assertDocumentTextEqual(document, '"')
     })

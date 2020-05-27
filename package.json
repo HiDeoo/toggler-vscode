@@ -20,7 +20,8 @@
     "selection"
   ],
   "activationEvents": [
-    "onCommand:extension.toggle"
+    "onCommand:extension.toggle",
+    "onCommand:extension.toggle.settings"
   ],
   "icon": "images/icon.png",
   "repository": {
@@ -53,7 +54,13 @@
     "commands": [
       {
         "command": "extension.toggle",
-        "title": "Toggle"
+        "title": "Toggle",
+        "category": "Toggler"
+      },
+      {
+        "command": "extension.toggle.settings",
+        "title": "Customize toggles",
+        "category": "Toggler"
       }
     ],
     "keybindings": [

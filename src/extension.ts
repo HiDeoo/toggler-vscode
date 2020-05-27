@@ -3,9 +3,12 @@ import { commands, ExtensionContext, Range, Selection, TextEditor, window, works
 import * as defaults from './defaults.json'
 
 /**
- * The toggler command identifier.
+ * Toggler command identifiers.
  */
-export const TogglerCommand = 'extension.toggle'
+export const TogglerCommands = {
+  Toggle: 'extension.toggle',
+  Settings: 'extension.toggle.settings',
+} as const
 
 /**
  * RegExp special characters.
@@ -22,13 +25,16 @@ let configuration: ToggleConfiguration[] | undefined
  * @param context - The extension context.
  */
 export function activate(context: ExtensionContext) {
-  let disposable = commands.registerCommand(TogglerCommand, () => {
-    loadConfiguration()
+  context.subscriptions.push(
+    commands.registerCommand(TogglerCommands.Toggle, () => {
+      loadConfiguration()
 
-    return toggle()
-  })
-
-  context.subscriptions.push(disposable)
+      return toggle()
+    }),
+    commands.registerCommand(TogglerCommands.Settings, () => {
+      commands.executeCommand('workbench.action.openSettings', '@ext:hideoo.toggler')
+    })
+  )
 }
 
 /**

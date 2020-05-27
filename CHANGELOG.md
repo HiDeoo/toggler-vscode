@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### 🚀 New Feature
+
+- Add a new _Customize toggles_ command in the Command Palette to quickly edit custom toggles.
+
 ### 🐛 Bug Fix
 
 - Fix some default toggles order.
