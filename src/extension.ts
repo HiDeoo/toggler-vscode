@@ -32,7 +32,7 @@ export function activate(context: ExtensionContext) {
       return toggle()
     }),
     commands.registerCommand(TogglerCommands.Settings, () => {
-      commands.executeCommand('workbench.action.openSettings', '@ext:hideoo.toggler')
+      openTogglerSettings()
     }),
     workspace.onDidChangeConfiguration(() => {
       loadConfiguration(true)
@@ -51,7 +51,7 @@ export function deactivate() {
  * Loads the configuration.
  * @param reload - Defines if the configuration should be reloaded or not.
  */
-export function loadConfiguration(reload = false) {
+function loadConfiguration(reload = false) {
   if (configuration && !reload) {
     return
   }
@@ -59,6 +59,13 @@ export function loadConfiguration(reload = false) {
   const customToggles = workspace.getConfiguration('toggler').get<ToggleConfiguration[]>('toggles', [])
 
   configuration = customToggles.concat(defaults)
+}
+
+/**
+ * Opens the Toggler settings.
+ */
+function openTogglerSettings() {
+  commands.executeCommand('workbench.action.openSettings', '@ext:hideoo.toggler')
 }
 
 /**
@@ -73,7 +80,9 @@ function toggle() {
 
   const selections = editor.selections
 
-  return editor.edit((editBuilder) => {
+  return editor.edit(async (editBuilder) => {
+    let didFail = false
+
     selections.forEach((selection) => {
       const toggle = getToggle(editor, selection)
 
@@ -86,13 +95,22 @@ function toggle() {
           editBuilder.replace(selection, toggle.new)
         }
       } else {
-        const details = toggle.selected ? ` for '${editor.document.getText(selection)}'` : ''
-
-        window.showWarningMessage(
-          `Toggler: Could not find toggles${details}. You can add one in your VS Code settings.`
-        )
+        didFail = true
       }
     })
+
+    if (didFail) {
+      const settingsButton = 'Open Settings'
+
+      const result = await window.showWarningMessage(
+        `Toggler: Could not find a toggle. You can add one in your VS Code settings.`,
+        settingsButton
+      )
+
+      if (result === settingsButton) {
+        openTogglerSettings()
+      }
+    }
   })
 }
 
