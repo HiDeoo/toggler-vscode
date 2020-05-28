@@ -68,7 +68,7 @@
         "command": "extension.toggle",
         "key": "alt+r",
         "mac": "ctrl+r",
-        "when": "editorFocus"
+        "when": "editorTextFocus"
       }
     ],
     "menus": {
@@ -82,7 +82,7 @@
         {
           "command": "extension.toggle",
           "group": "1_modification",
-          "when": "editorFocus"
+          "when": "editorTextFocus"
         }
       ]
     },

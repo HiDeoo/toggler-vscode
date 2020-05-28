@@ -12,6 +12,7 @@
 - Fix some default toggles order.
 - Fix an issue with the _Toggle_ command not appearing in the Command Palette.
 - Trigger only 1 notification when failing to toggle multiple words with multiple cursors.
+- The default _Toggle_ shortcut is no longer triggered if the text in an editor doesn't have focus.
 
 ### ⚙️ Internal
 
