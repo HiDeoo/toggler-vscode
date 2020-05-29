@@ -56,9 +56,12 @@ function loadConfiguration(reload = false) {
     return
   }
 
-  const customToggles = workspace.getConfiguration('toggler').get<ToggleConfiguration[]>('toggles', [])
+  const togglerConfiguration = workspace.getConfiguration('toggler')
 
-  configuration = customToggles.concat(defaults)
+  const useDefaultToggles = togglerConfiguration.get<boolean>('useDefaultToggles', true)
+  const customToggles = togglerConfiguration.get<ToggleConfiguration[]>('toggles', [])
+
+  configuration = useDefaultToggles ? customToggles.concat(defaults) : customToggles
 }
 
 /**

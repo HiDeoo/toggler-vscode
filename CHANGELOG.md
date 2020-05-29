@@ -6,6 +6,7 @@
 
 - Add a new _Customize toggles_ command in the Command Palette to quickly edit custom toggles.
 - Customizing toggles no longer requires to reload the VSCode window for the changes to take effect.
+- [Default toggles](https://raw.githubusercontent.com/HiDeoo/toggler-vscode/master/src/defaults.json) can now be disabled if they don't fit your preferences.
 
 ### 🐛 Bug Fix
 

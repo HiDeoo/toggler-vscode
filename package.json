@@ -103,6 +103,11 @@
             ]
           ],
           "description": "Custom toggles."
+        },
+        "toggler.useDefaultToggles": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Toggler is bundled with some [default toggles](https://raw.githubusercontent.com/HiDeoo/toggler-vscode/master/src/defaults.json) merged with your custom ones that you can disable if they don't fit your preferences."
         }
       }
     }
