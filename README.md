@@ -32,7 +32,7 @@ You can also use the VS Code Command Palette and choose the `Toggle` command, or
 
 You can customize the default configuration directly in your VS Code settings:
 
-```
+```json
 "toggler.toggles": [
     [
       "custom_1",
@@ -47,7 +47,7 @@ You can customize the default configuration directly in your VS Code settings:
 
 Toggler is bundled with these default toggles:
 
-```
+```json
 [
   ["absolute", "relative"],
   ["high", "low"],
@@ -184,6 +184,8 @@ Toggler is bundled with these default toggles:
 ]
 ```
 
-## Copyright and license
+## License
 
-Copyright (c) 2018 HiDeoo. Code released under the [MIT license](https://github.com/HiDeoo/toggler-vscode/blob/master/LICENSE.md).
+Licensed under the MIT License, Copyright © HiDeoo.
+
+See [LICENSE](https://github.com/HiDeoo/toggler-vscode/blob/master/LICENSE) for more information.
