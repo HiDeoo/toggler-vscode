@@ -184,6 +184,8 @@ Toggler is bundled with these default toggles:
 ]
 ```
 
+If these default toggles don't fit your preferences, you can disable them in your prefernces to only use custom toggles.
+
 ## License
 
 Licensed under the MIT License, Copyright © HiDeoo.
