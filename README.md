@@ -4,7 +4,7 @@
 </div>
 
 <div align="center">
-  <a href="https://github.com/HiDeoo/toggler-vscode/actions?query=workflow%3Aintegration"><img alt="Integration Status" src="https://github.com/HiDeoo/toggler-vscode/workflows/integration/badge.svg"></a>
+  <a href="https://github.com/HiDeoo/toggler-vscode/actions?query=workflow%3Aintegration"><img alt="Integration Status" src="https://img.shields.io/github/workflow/status/HiDeoo/toggler-vscode/integration"></a>
   <a href="https://david-dm.org/HiDeoo/toggler-vscode"><img alt="Dependency Status" src="https://david-dm.org/HiDeoo/toggler-vscode.svg"></a>
   <br /><br />
 </div>
