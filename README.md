@@ -1,11 +1,15 @@
-# Toggler Extension
+<div align="center">
+  <h1>Toggler 🖇️</h1>
+  <p>Toggle words and symbols in VS Code using a user defined configuration</p>
+</div>
 
-[![integration](https://github.com/HiDeoo/toggler-vscode/workflows/integration/badge.svg)](https://github.com/HiDeoo/toggler-vscode/actions?query=workflow%3Aintegration)
-[![Dependency Status](https://david-dm.org/HiDeoo/toggler-vscode.svg)](https://david-dm.org/HiDeoo/toggler-vscode)
+<div align="center">
+  <a href="https://github.com/HiDeoo/toggler-vscode/actions?query=workflow%3Aintegration"><img alt="Integration Status" src="https://github.com/HiDeoo/toggler-vscode/workflows/integration/badge.svg"></a>
+  <a href="https://david-dm.org/HiDeoo/toggler-vscode"><img alt="Dependency Status" src="https://david-dm.org/HiDeoo/toggler-vscode.svg"></a>
+  <br /><br />
+</div>
 
-Toggle words and symbols in VS Code using a user defined configuration.
-
-This is the **official** port of the [Atom package](https://atom.io/packages/toggler) of the same name.
+This is the official port of the [Atom package](https://atom.io/packages/toggler) of the same name.
 
 ![Screenshot of the Toggler Extension](https://i.imgur.com/8ffMj84.gif)
 
