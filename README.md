@@ -11,7 +11,7 @@
 
 This is the official port of the [Atom package](https://atom.io/packages/toggler) of the same name.
 
-![Screenshot of the Toggler Extension](https://i.imgur.com/8ffMj84.gif)
+![Screenshot of the Toggler Extension](https://i.imgur.com/iozE1kZ.gif)
 
 [Changelog](https://github.com/HiDeoo/toggler-vscode/blob/master/CHANGELOG.md)
 
