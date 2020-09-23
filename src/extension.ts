@@ -35,7 +35,7 @@ export function activate(context: ExtensionContext) {
       openTogglerSettings()
     }),
     workspace.onDidChangeConfiguration(() => {
-      loadConfiguration(true)
+      loadConfiguration()
     })
   )
 }
@@ -51,12 +51,8 @@ export function deactivate() {
  * Loads the configuration.
  * @param reload - Defines if the configuration should be reloaded or not.
  */
-function loadConfiguration(reload = false) {
-  if (configuration && !reload) {
-    return
-  }
-
-  const togglerConfiguration = workspace.getConfiguration('toggler')
+function loadConfiguration() {
+  const togglerConfiguration = workspace.getConfiguration('toggler', window.activeTextEditor?.document)
 
   const useDefaultToggles = togglerConfiguration.get<boolean>('useDefaultToggles', true)
   const customToggles = togglerConfiguration.get<ToggleConfiguration[]>('toggles', [])
