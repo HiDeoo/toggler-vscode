@@ -1,5 +1,13 @@
 # Change Log
 
+## Unreleased
+
+The extension now requires at least [Visual Studio Code 1.42.0 _(January 2020)_](https://code.visualstudio.com/updates/v1_42).
+
+### 🚀 New Feature
+
+- TODO
+
 ## 0.1.1
 
 ### 🚀 New Feature
