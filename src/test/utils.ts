@@ -52,9 +52,17 @@ async function setSettings(settings: ExtensionSettings): Promise<ExtensionSettin
   const togglerConfiguration = workspace.getConfiguration('toggler')
 
   if (typeof settings.useDefaultToggles !== 'undefined') {
-    currentSettings.useDefaultToggles = togglerConfiguration.get<boolean>('useDefaultToggles')
+    currentSettings.useDefaultToggles = togglerConfiguration.get<ExtensionSettings['useDefaultToggles']>(
+      'useDefaultToggles'
+    )
 
     await togglerConfiguration.update('useDefaultToggles', settings.useDefaultToggles, true)
+  }
+
+  if (settings.toggles) {
+    currentSettings.toggles = togglerConfiguration.get<ExtensionSettings['toggles']>('toggles')
+
+    await togglerConfiguration.update('toggles', settings.toggles, true)
   }
 
   return currentSettings
@@ -65,4 +73,5 @@ async function setSettings(settings: ExtensionSettings): Promise<ExtensionSettin
  */
 interface ExtensionSettings {
   useDefaultToggles?: boolean
+  toggles?: string[][]
 }

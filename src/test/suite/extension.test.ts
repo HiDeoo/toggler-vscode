@@ -151,4 +151,16 @@ suite('Toggler Test Suite', () => {
       { useDefaultToggles: false }
     )
   })
+
+  test('should replace a custom toggle', () => {
+    return withEditor(
+      'aaa',
+      async (document) => {
+        await commands.executeCommand(TogglerCommands.Toggle)
+
+        assertDocumentTextEqual(document, 'bbb')
+      },
+      { toggles: [['aaa', 'bbb']] }
+    )
+  })
 })
