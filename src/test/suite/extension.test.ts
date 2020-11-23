@@ -139,4 +139,16 @@ suite('Toggler Test Suite', () => {
       assertDocumentTextEqual(document, '"')
     })
   })
+
+  test('should not use default toggles if the option is globally disabled', () => {
+    return withEditor(
+      'true',
+      async (document) => {
+        await commands.executeCommand(TogglerCommands.Toggle)
+
+        assertDocumentTextEqual(document, 'true')
+      },
+      { useDefaultToggles: false }
+    )
+  })
 })
