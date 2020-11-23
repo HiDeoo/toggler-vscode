@@ -5,25 +5,20 @@ import { commands, Position, TextDocument, TextEditor, Uri, window, workspace } 
  * Runs code in an untitled file editor.
  * @param content - The editor initial content.
  * @param run - The code to run in the editor.
+ * @param settings - The settings to use when running the code.
  */
 export async function withEditor(
   content: string,
   run: (doc: TextDocument, editor: TextEditor) => void,
-  customSettings?: CustomSettings
+  settings?: ExtensionSettings
 ) {
   const document = await workspace.openTextDocument(Uri.parse('untitled:Toggler'))
   const editor = await window.showTextDocument(document)
 
-  const currentSettings: CustomSettings = {}
+  let currentSettings: ExtensionSettings | undefined
 
-  if (customSettings) {
-    const togglerConfiguration = workspace.getConfiguration('toggler')
-
-    if (typeof customSettings.useDefaultToggles !== 'undefined') {
-      currentSettings.useDefaultToggles = togglerConfiguration.get<boolean>('useDefaultToggles')
-
-      await togglerConfiguration.update('useDefaultToggles', customSettings.useDefaultToggles, true)
-    }
+  if (settings) {
+    currentSettings = await setSettings(settings)
   }
 
   await editor.edit((editBuilder) => {
@@ -32,15 +27,8 @@ export async function withEditor(
 
   await run(document, editor)
 
-  if (customSettings) {
-    const togglerConfiguration = workspace.getConfiguration('toggler')
-
-    if (
-      typeof customSettings.useDefaultToggles !== 'undefined' &&
-      typeof currentSettings.useDefaultToggles !== 'undefined'
-    ) {
-      await togglerConfiguration.update('useDefaultToggles', currentSettings.useDefaultToggles, true)
-    }
+  if (settings && currentSettings) {
+    await setSettings(currentSettings)
   }
 
   return commands.executeCommand('workbench.action.closeAllEditors')
@@ -56,8 +44,25 @@ export function assertDocumentTextEqual(document: TextDocument, expected: string
 }
 
 /**
- * Custom settings that can be used during a test.
+ * Updates settings and returns the previous ones before the update.
+ * @param settings - The new settings.
  */
-interface CustomSettings {
+async function setSettings(settings: ExtensionSettings): Promise<ExtensionSettings> {
+  const currentSettings: ExtensionSettings = {}
+  const togglerConfiguration = workspace.getConfiguration('toggler')
+
+  if (typeof settings.useDefaultToggles !== 'undefined') {
+    currentSettings.useDefaultToggles = togglerConfiguration.get<boolean>('useDefaultToggles')
+
+    await togglerConfiguration.update('useDefaultToggles', settings.useDefaultToggles, true)
+  }
+
+  return currentSettings
+}
+
+/**
+ * Settings that can be overridden during a test.
+ */
+interface ExtensionSettings {
   useDefaultToggles?: boolean
 }
