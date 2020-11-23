@@ -38,8 +38,10 @@ export function activate(context: ExtensionContext) {
     commands.registerCommand(TogglerCommands.Settings, () => {
       openTogglerSettings()
     }),
-    workspace.onDidChangeConfiguration(() => {
-      resetConfiguration()
+    workspace.onDidChangeConfiguration((event) => {
+      if (event.affectsConfiguration('toggler')) {
+        resetConfiguration()
+      }
     })
   )
 }
