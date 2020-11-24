@@ -6,7 +6,11 @@ The extension now requires at least [Visual Studio Code 1.42.0 _(January 2020)_]
 
 ### 🚀 New Feature
 
-- TODO
+- Add support for [language-specific](https://code.visualstudio.com/docs/getstarted/settings#_languagespecific-editor-settings) custom toggles.
+
+### 🐛 Bug Fix
+
+- Prevent reloading the extension configuration when unrelated Visual Studio Code settings are modified.
 
 ## 0.1.1
 
