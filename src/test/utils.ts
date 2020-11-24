@@ -1,5 +1,5 @@
 import * as assert from 'assert'
-import { commands, Position, TextDocument, TextEditor, Uri, window, workspace } from 'vscode'
+import { commands, Position, TextDocument, TextEditor, Uri, window, workspace, WorkspaceConfiguration } from 'vscode'
 
 /**
  * Runs code in an untitled file editor.
@@ -10,15 +10,15 @@ import { commands, Position, TextDocument, TextEditor, Uri, window, workspace } 
 export async function withEditor(
   content: string,
   run: (doc: TextDocument, editor: TextEditor) => void,
-  settings?: ExtensionSettings
+  settings?: TestSettings
 ) {
   const document = await workspace.openTextDocument(Uri.parse('untitled:Toggler'))
   const editor = await window.showTextDocument(document)
 
-  let currentSettings: ExtensionSettings | undefined
+  let currentSettings: TestSettings | undefined
 
   if (settings) {
-    currentSettings = await setSettings(settings)
+    currentSettings = await setTestSettings(settings)
   }
 
   await editor.edit((editBuilder) => {
@@ -28,7 +28,7 @@ export async function withEditor(
   await run(document, editor)
 
   if (settings && currentSettings) {
-    await setSettings(currentSettings)
+    await setTestSettings(currentSettings)
   }
 
   return commands.executeCommand('workbench.action.closeAllEditors')
@@ -44,28 +44,64 @@ export function assertDocumentTextEqual(document: TextDocument, expected: string
 }
 
 /**
- * Updates settings and returns the previous ones before the update.
+ * Updates settings for a specific test and returns the previous ones before the update.
  * @param settings - The new settings.
  */
-async function setSettings(settings: ExtensionSettings): Promise<ExtensionSettings> {
-  const currentSettings: ExtensionSettings = {}
-  const togglerConfiguration = workspace.getConfiguration('toggler')
+async function setTestSettings(settings: TestSettings): Promise<TestSettings> {
+  const currentTestSettings: TestSettings = {}
 
-  if (typeof settings.useDefaultToggles !== 'undefined') {
-    currentSettings.useDefaultToggles = togglerConfiguration.get<ExtensionSettings['useDefaultToggles']>(
-      'useDefaultToggles'
+  if (settings.global) {
+    currentTestSettings.global = await setConfigurationSettings(settings.global, workspace.getConfiguration('toggler'))
+  }
+
+  if (settings.language) {
+    currentTestSettings.language = await Promise.all(
+      settings.language.map(async ([languageId, settings]) => {
+        const currentLanguageSettings = await setConfigurationSettings(
+          settings,
+          workspace.getConfiguration('toggler', { languageId }),
+          languageId
+        )
+
+        return [languageId, currentLanguageSettings] as [string, ExtensionSettings]
+      })
     )
-
-    await togglerConfiguration.update('useDefaultToggles', settings.useDefaultToggles, true)
   }
 
-  if (settings.toggles) {
-    currentSettings.toggles = togglerConfiguration.get<ExtensionSettings['toggles']>('toggles')
+  return currentTestSettings
+}
 
-    await togglerConfiguration.update('toggles', settings.toggles, true)
-  }
+/**
+ * Sets settings on a specific workspace configuration.
+ * @param settings - The new settings.
+ * @param configuration - The configuration (scoped or not) containing the settings to update.
+ * @param languageId - The language ID if any.
+ */
+async function setConfigurationSettings(
+  settings: ExtensionSettings,
+  configuration: WorkspaceConfiguration,
+  languageId?: string
+): Promise<ExtensionSettings> {
+  const currentSettings: ExtensionSettings = {}
+
+  currentSettings.useDefaultToggles = configuration.get<ExtensionSettings['useDefaultToggles']>('useDefaultToggles')
+
+  await configuration.update('useDefaultToggles', settings.useDefaultToggles, true)
+
+  const configurationSetting = configuration.inspect<ExtensionSettings['toggles']>('toggles')
+  currentSettings.toggles = languageId ? configurationSetting?.globalLanguageValue : configurationSetting?.globalValue
+
+  await configuration.update('toggles', settings.toggles, true, languageId ? true : false)
 
   return currentSettings
+}
+
+/**
+ * Various type of settings that can be overridden in a test.
+ */
+interface TestSettings {
+  global?: ExtensionSettings
+  language?: [string, Omit<ExtensionSettings, 'useDefaultToggles'>][]
 }
 
 /**
