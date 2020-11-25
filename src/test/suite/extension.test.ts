@@ -150,7 +150,7 @@ suite('Toggler Test Suite', () => {
       },
       { global: { useDefaultToggles: false } }
     )
-  })
+  }).timeout(10000)
 
   test('should replace a global custom toggle', () => {
     return withEditor(
@@ -165,7 +165,7 @@ suite('Toggler Test Suite', () => {
         language: [['json', { toggles: [['aaa', 'ccc']] }]],
       }
     )
-  })
+  }).timeout(10000)
 
   test('should replace a language-specific custom toggle', () => {
     return withEditor(
@@ -184,4 +184,4 @@ suite('Toggler Test Suite', () => {
       }
     )
   })
-})
+}).timeout(10000)
