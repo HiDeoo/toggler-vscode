@@ -139,4 +139,49 @@ suite('Toggler Test Suite', () => {
       assertDocumentTextEqual(document, '"')
     })
   })
-})
+
+  test('should not use default toggles if the option is disabled', () => {
+    return withEditor(
+      'true',
+      async (document) => {
+        await commands.executeCommand(TogglerCommands.Toggle)
+
+        assertDocumentTextEqual(document, 'true')
+      },
+      { global: { useDefaultToggles: false } }
+    )
+  }).timeout(10000)
+
+  test('should replace a global custom toggle', () => {
+    return withEditor(
+      'aaa',
+      async (document) => {
+        await commands.executeCommand(TogglerCommands.Toggle)
+
+        assertDocumentTextEqual(document, 'bbb')
+      },
+      {
+        global: { toggles: [['aaa', 'bbb']] },
+        language: [['json', { toggles: [['aaa', 'ccc']] }]],
+      }
+    )
+  }).timeout(10000)
+
+  test('should replace a language-specific custom toggle', () => {
+    return withEditor(
+      'aaa',
+      async (document) => {
+        await commands.executeCommand(TogglerCommands.Toggle)
+
+        assertDocumentTextEqual(document, 'ccc')
+      },
+      {
+        global: { toggles: [['aaa', 'bbb']] },
+        language: [
+          ['plaintext', { toggles: [['aaa', 'ccc']] }],
+          ['json', { toggles: [['aaa', 'ddd']] }],
+        ],
+      }
+    )
+  })
+}).timeout(10000)

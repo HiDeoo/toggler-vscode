@@ -18,7 +18,7 @@ const RegExpCharacters = /[|\\{}()[\]^$+*?.]/g
 /**
  * Toggler configuration.
  */
-let configuration: ToggleConfiguration[] | undefined
+let configuration: Record<string, ToggleConfiguration[]> | undefined
 
 /**
  * Triggered when the extension is activated (the very first time the command is executed).
@@ -27,6 +27,10 @@ let configuration: ToggleConfiguration[] | undefined
 export function activate(context: ExtensionContext) {
   context.subscriptions.push(
     commands.registerCommand(TogglerCommands.Toggle, () => {
+      if (!window.activeTextEditor) {
+        return
+      }
+
       loadConfiguration()
 
       return toggle()
@@ -34,8 +38,10 @@ export function activate(context: ExtensionContext) {
     commands.registerCommand(TogglerCommands.Settings, () => {
       openTogglerSettings()
     }),
-    workspace.onDidChangeConfiguration(() => {
-      loadConfiguration(true)
+    workspace.onDidChangeConfiguration((event) => {
+      if (event.affectsConfiguration('toggler')) {
+        resetConfiguration()
+      }
     })
   )
 }
@@ -48,20 +54,46 @@ export function deactivate() {
 }
 
 /**
- * Loads the configuration.
- * @param reload - Defines if the configuration should be reloaded or not.
+ * Resets the configuration.
  */
-function loadConfiguration(reload = false) {
-  if (configuration && !reload) {
+function resetConfiguration() {
+  configuration = undefined
+}
+
+/**
+ * Loads the configuration.
+ */
+function loadConfiguration() {
+  if (!window.activeTextEditor) {
     return
   }
 
-  const togglerConfiguration = workspace.getConfiguration('toggler')
+  const languageId = window.activeTextEditor.document.languageId
+
+  if (configuration && configuration[languageId]) {
+    return
+  }
+
+  if (!configuration) {
+    configuration = {}
+  }
+
+  let customToggles: ToggleConfiguration[] = []
+
+  const togglerConfiguration = workspace.getConfiguration('toggler', window.activeTextEditor?.document)
 
   const useDefaultToggles = togglerConfiguration.get<boolean>('useDefaultToggles', true)
-  const customToggles = togglerConfiguration.get<ToggleConfiguration[]>('toggles', [])
+  const customTogglesInfos = togglerConfiguration.inspect<ToggleConfiguration[]>('toggles')
 
-  configuration = useDefaultToggles ? customToggles.concat(defaults) : customToggles
+  if (customTogglesInfos) {
+    if (customTogglesInfos.globalLanguageValue) {
+      customToggles = customTogglesInfos.globalLanguageValue
+    } else if (customTogglesInfos.globalValue) {
+      customToggles = customTogglesInfos.globalValue
+    }
+  }
+
+  configuration[languageId] = useDefaultToggles ? customToggles.concat(defaults) : customToggles
 }
 
 /**
@@ -134,16 +166,18 @@ function getToggle(editor: TextEditor, selection: Selection): Toggle {
     selected,
   }
 
-  if (!configuration) {
+  if (!configuration || !configuration[editor.document.languageId]) {
     return toggle
   }
+
+  const languageConfiguration = configuration[editor.document.languageId]
 
   if (!selected) {
     lineText = editor.document.lineAt(cursorPosition).text
   }
 
-  for (let i = 0; i < configuration.length; i++) {
-    const words = configuration[i]
+  for (let i = 0; i < languageConfiguration.length; i++) {
+    const words = languageConfiguration[i]
 
     for (let j = 0; j < words.length; j++) {
       const currentWord = words[j]
