@@ -2,6 +2,11 @@ import * as assert from 'assert'
 import { commands, Position, TextDocument, TextEditor, Uri, window, workspace, WorkspaceConfiguration } from 'vscode'
 
 /**
+ * The test timeout (in milliseconds) to use use during a test modifying the settings.
+ */
+const TEST_WITH_CUSTOM_SETTINGS_TIMEOUT = 15000
+
+/**
  * Runs code in an untitled file editor.
  * @param content - The editor initial content.
  * @param run - The code to run in the editor.
@@ -41,6 +46,19 @@ export async function withEditor(
  */
 export function assertDocumentTextEqual(document: TextDocument, expected: string) {
   assert.strictEqual(document.getText(), expected)
+}
+
+/**
+ * Runs a test that will involve custom settings.
+ * @param title - The test title.
+ * @param fn - The test to run.
+ */
+export function testWithCustomSettings(title: string, fn: Mocha.AsyncFunc) {
+  test(title, function qqqq() {
+    this.timeout(TEST_WITH_CUSTOM_SETTINGS_TIMEOUT)
+
+    return fn.call(this)
+  })
 }
 
 /**
