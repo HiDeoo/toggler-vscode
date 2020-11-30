@@ -39,7 +39,7 @@
   },
   "badges": [
     {
-      "url": "https://img.shields.io/github/workflow/status/HiDeoo/toggler-vscode/integration",
+      "url": "https://github.com/HiDeoo/toggler-vscode/workflows/integration/badge.svg",
       "href": "https://github.com/HiDeoo/toggler-vscode/actions?query=workflow%3Aintegration",
       "description": "Build Status"
     },
