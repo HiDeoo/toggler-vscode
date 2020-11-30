@@ -1,7 +1,7 @@
 import { commands, Position, Selection, window } from 'vscode'
 
 import { TogglerCommands } from '../../extension'
-import { withEditor, assertDocumentTextEqual } from '../utils'
+import { withEditor, assertDocumentTextEqual, testWithCustomSettings } from '../utils'
 
 suite('Toggler Test Suite', () => {
   window.showInformationMessage('Start all tests.')
@@ -140,7 +140,7 @@ suite('Toggler Test Suite', () => {
     })
   })
 
-  test('should not use default toggles if the option is disabled', () => {
+  testWithCustomSettings('should not use default toggles if the option is disabled', () => {
     return withEditor(
       'true',
       async (document) => {
@@ -150,9 +150,9 @@ suite('Toggler Test Suite', () => {
       },
       { global: { useDefaultToggles: false } }
     )
-  }).timeout(10000)
+  })
 
-  test('should replace a global custom toggle', () => {
+  testWithCustomSettings('should replace a global custom toggle', () => {
     return withEditor(
       'aaa',
       async (document) => {
@@ -165,9 +165,9 @@ suite('Toggler Test Suite', () => {
         language: [['json', { toggles: [['aaa', 'ccc']] }]],
       }
     )
-  }).timeout(10000)
+  })
 
-  test('should replace a language-specific custom toggle', () => {
+  testWithCustomSettings('should replace a language-specific custom toggle', () => {
     return withEditor(
       'aaa',
       async (document) => {
@@ -184,4 +184,4 @@ suite('Toggler Test Suite', () => {
       }
     )
   })
-}).timeout(10000)
+})
