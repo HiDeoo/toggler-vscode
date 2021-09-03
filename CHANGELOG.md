@@ -7,6 +7,7 @@ The extension can now be used when Visual Studio Code runs as an editor in the b
 ### 🚀 New Feature
 
 - Add support for running in an extension host in the browser.
+- Add support for [Workspace Trust](https://code.visualstudio.com/docs/editor/workspace-trust). The extension is fully supported in Restricted Mode as it does not need Workspace Trust to perform any functionality.
 
 ## 0.2.0
 
