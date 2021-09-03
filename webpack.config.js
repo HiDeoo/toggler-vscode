@@ -1,22 +1,31 @@
 // @ts-check
 
 const path = require('path')
+const webpack = require('webpack')
 
 /**@type {import('webpack').Configuration}*/
 module.exports = {
-  entry: './src/extension.ts',
+  entry: {
+    extension: './src/extension.ts',
+    'test/suite/index': './src/test/suite/index.web.ts',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'extension.js',
-    libraryTarget: 'commonjs2',
+    filename: '[name].js',
+    libraryTarget: 'commonjs',
     clean: true,
   },
-  target: 'node',
+  target: 'webworker',
   mode: 'none',
+  resolve: {
+    extensions: ['.ts', '.js'],
+    fallback: {
+      assert: require.resolve('assert'),
+    },
+  },
   externals: {
     vscode: 'commonjs vscode',
   },
-  resolve: { extensions: ['.ts', '.js'] },
   module: {
     rules: [
       {
@@ -27,4 +36,8 @@ module.exports = {
     ],
   },
   devtool: 'nosources-source-map',
+  plugins: [new webpack.ProvidePlugin({ process: 'process/browser' })],
+  performance: {
+    assetFilter: (assetFilename) => !/\.map$/.test(assetFilename) && !assetFilename.startsWith('test/'),
+  },
 }
