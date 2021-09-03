@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 0.3.0
 
 The extension can now be used when Visual Studio Code runs as an editor in the browser, for example with [github.dev](https://github.dev), when pressing `.` (the period key) while checking code on [GitHub](https://github.com/).
 
