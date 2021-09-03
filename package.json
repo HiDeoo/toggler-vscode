@@ -114,6 +114,11 @@
       }
     }
   },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
   "scripts": {
     "build": "webpack",
     "build:test": "tsc -p .",
