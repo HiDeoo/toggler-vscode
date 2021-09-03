@@ -8,6 +8,7 @@ The extension can now be used when Visual Studio Code runs as an editor in the b
 
 - Add support for running in an extension host in the browser.
 - Add support for [Workspace Trust](https://code.visualstudio.com/docs/editor/workspace-trust). The extension is fully supported in Restricted Mode as it does not need Workspace Trust to perform any functionality.
+- The extension is now available on [the Open VSX Registry](https://open-vsx.org/extension/hideoo/toggler) for VS Code compatible editors like VSCodium.
 
 ## 0.2.0
 
