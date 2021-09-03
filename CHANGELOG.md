@@ -1,5 +1,13 @@
 # Change Log
 
+## Unreleased
+
+The extension can now be used when Visual Studio Code runs as an editor in the browser, for example with [github.dev](https://github.dev), when pressing `.` (the period key) while checking code on [GitHub](https://github.com/).
+
+### 🚀 New Feature
+
+- Add support for running in an extension host in the browser.
+
 ## 0.2.0
 
 The extension now requires at least [Visual Studio Code 1.42.0 _(January 2020)_](https://code.visualstudio.com/updates/v1_42).

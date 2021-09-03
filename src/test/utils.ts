@@ -54,7 +54,7 @@ export function assertDocumentTextEqual(document: TextDocument, expected: string
  * @param fn - The test to run.
  */
 export function testWithCustomSettings(title: string, fn: Mocha.AsyncFunc) {
-  test(title, function qqqq() {
+  test(title, function () {
     this.timeout(TEST_WITH_CUSTOM_SETTINGS_TIMEOUT)
 
     return fn.call(this)

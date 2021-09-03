@@ -5,14 +5,24 @@
     {
       "type": "npm",
       "script": "watch",
-      "problemMatcher": "$tsc-watch",
+      "problemMatcher": "$ts-webpack-watch",
       "isBackground": true,
-      "presentation": {
-        "reveal": "never"
-      },
       "group": {
         "kind": "build",
         "isDefault": true
+      },
+      "presentation": {
+        "reveal": "never"
+      }
+    },
+    {
+      "type": "npm",
+      "script": "watch:test",
+      "problemMatcher": "$tsc-watch",
+      "isBackground": true,
+      "group": "build",
+      "presentation": {
+        "reveal": "never"
       }
     }
   ]

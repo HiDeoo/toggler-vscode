@@ -4,8 +4,6 @@ import { TogglerCommands } from '../../extension'
 import { withEditor, assertDocumentTextEqual, testWithCustomSettings } from '../utils'
 
 suite('Toggler Test Suite', () => {
-  window.showInformationMessage('Start all tests.')
-
   test('should replace known words', () => {
     return withEditor('gray', async (document) => {
       await commands.executeCommand(TogglerCommands.Toggle)
