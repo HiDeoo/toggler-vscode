@@ -44,9 +44,9 @@
       "description": "Build Status"
     },
     {
-      "url": "https://david-dm.org/HiDeoo/toggler-vscode.svg",
-      "href": "https://david-dm.org/HiDeoo/toggler-vscode",
-      "description": "Dependency Status"
+      "url": "https://badgen.net/github/license/hideoo/toggler-vscode",
+      "href": "https://github.com/HiDeoo/toggler-vscode/blob/main/LICENSE.md",
+      "description": "License"
     }
   ],
   "main": "./dist/extension.js",
