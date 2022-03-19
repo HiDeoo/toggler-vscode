@@ -135,6 +135,13 @@ function toggle() {
     })
 
     if (didFail) {
+      const togglerConfiguration = workspace.getConfiguration('toggler', window.activeTextEditor?.document)
+      const showToggleFailureNotification = togglerConfiguration.get<boolean>('showToggleFailureNotification', true)
+
+      if (!showToggleFailureNotification) {
+        return
+      }
+
       const settingsButton = 'Open Settings'
 
       const result = await window.showWarningMessage(
