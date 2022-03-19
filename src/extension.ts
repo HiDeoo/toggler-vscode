@@ -211,14 +211,17 @@ function getToggle(editor: TextEditor, selection: Selection): Toggle {
       const lowerCaseCurrentWord = currentWord.toLowerCase()
 
       if (word.toLowerCase() === lowerCaseCurrentWord) {
-        if (word === lowerCaseCurrentWord) {
-          toggle.new = words[nextWordIndex].toLowerCase()
-        } else if (word === currentWord.toUpperCase()) {
-          toggle.new = words[nextWordIndex].toUpperCase()
-        } else if (word === capitalize(currentWord)) {
-          toggle.new = capitalize(words[nextWordIndex])
+        const nextWord = words[nextWordIndex]
+        const nextWordHasUppercase = /[A-Z]/.test(nextWord)
+
+        if (!nextWordHasUppercase && word === lowerCaseCurrentWord) {
+          toggle.new = nextWord.toLowerCase()
+        } else if (!nextWordHasUppercase && word === currentWord.toUpperCase()) {
+          toggle.new = nextWord.toUpperCase()
+        } else if (!nextWordHasUppercase && word === capitalize(currentWord)) {
+          toggle.new = capitalize(nextWord)
         } else {
-          toggle.new = words[nextWordIndex]
+          toggle.new = nextWord
         }
 
         return toggle
@@ -235,7 +238,7 @@ function getToggle(editor: TextEditor, selection: Selection): Toggle {
  * @return The capitalized string.
  */
 function capitalize(aString: string) {
-  return aString.charAt(0).toUpperCase() + aString.slice(1)
+  return aString.charAt(0).toUpperCase() + aString.slice(1).toLowerCase()
 }
 
 /**
