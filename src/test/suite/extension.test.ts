@@ -54,6 +54,46 @@ suite('Toggler Test Suite', () => {
     })
   })
 
+  testWithCustomSettings('should respect capitalization only if the first letter is uppercase', () => {
+    return withEditor(
+      'NaN',
+      async (document) => {
+        await commands.executeCommand(TogglerCommands.Toggle)
+
+        assertDocumentTextEqual(document, 'null')
+
+        await commands.executeCommand(TogglerCommands.Toggle)
+
+        assertDocumentTextEqual(document, 'undefined')
+
+        await commands.executeCommand(TogglerCommands.Toggle)
+
+        assertDocumentTextEqual(document, 'NaN')
+      },
+      { global: { toggles: [['NaN', 'null', 'undefined']] } }
+    )
+  })
+
+  testWithCustomSettings('should not infer letter case if the new word contains at least 1 uppercase letter', () => {
+    return withEditor(
+      'trim',
+      async (document) => {
+        await commands.executeCommand(TogglerCommands.Toggle)
+
+        assertDocumentTextEqual(document, 'trimStart')
+
+        await commands.executeCommand(TogglerCommands.Toggle)
+
+        assertDocumentTextEqual(document, 'trimEnd')
+
+        await commands.executeCommand(TogglerCommands.Toggle)
+
+        assertDocumentTextEqual(document, 'trim')
+      },
+      { global: { toggles: [['trim', 'trimStart', 'trimEnd']] } }
+    )
+  })
+
   test('should replace no matter the cursor position', async () => {
     const word = 'true'
 
