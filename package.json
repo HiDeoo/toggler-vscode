@@ -104,12 +104,20 @@
             ]
           ],
           "description": "Custom toggles.",
+          "order": 1,
           "scope": "language-overridable"
         },
         "toggler.useDefaultToggles": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "Toggler is bundled with some [default toggles](https://raw.githubusercontent.com/HiDeoo/toggler-vscode/master/src/defaults.json) merged with your custom ones that you can disable if they don't fit your preferences."
+          "markdownDescription": "Toggler is bundled with some [default toggles](https://raw.githubusercontent.com/HiDeoo/toggler-vscode/master/src/defaults.json) merged with your custom ones that you can disable if they don't fit your preferences.",
+          "order": 0
+        },
+        "toggler.showToggleFailureNotification": {
+          "type": "boolean",
+          "default": true,
+          "description": "Controls whether to show a notification when a toggle fails.",
+          "order": 2
         }
       }
     }
@@ -143,7 +151,7 @@
     "@types/webpack-env": "1.16.2",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
-    "@vscode/test-web": "0.0.8",
+    "@vscode/test-web": "0.0.22",
     "assert": "2.0.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "6.11.0",
