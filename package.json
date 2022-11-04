@@ -140,7 +140,7 @@
     "test:desktop": "node out/test/runTest.js",
     "test:web": "yarn web --extensionTestsPath=dist/test/suite/index.js --headless=true",
     "package": "webpack --mode production --devtool hidden-source-map",
-    "vscode:package": "vsce package",
+    "vscode:package": "npx vsce package",
     "vscode:prepublish": "yarn package"
   },
   "devDependencies": {
