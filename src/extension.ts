@@ -7,6 +7,7 @@ import * as defaults from './defaults.json'
  */
 export const TogglerCommands = {
   Toggle: 'extension.toggle',
+  ToggleReverse: 'extension.toggle-reverse',
   Settings: 'extension.toggle.settings',
 } as const
 
@@ -34,6 +35,15 @@ export function activate(context: ExtensionContext) {
       loadConfiguration()
 
       return toggle()
+    }),
+    commands.registerCommand(TogglerCommands.ToggleReverse, () => {
+      if (!window.activeTextEditor) {
+        return
+      }
+
+      loadConfiguration()
+
+      return toggle(true)
     }),
     commands.registerCommand(TogglerCommands.Settings, () => {
       openTogglerSettings()
@@ -106,7 +116,7 @@ function openTogglerSettings() {
 /**
  * Toggles words.
  */
-function toggle() {
+function toggle(reverse: boolean = false) {
   const editor = window.activeTextEditor
 
   if (!editor) {
@@ -119,7 +129,7 @@ function toggle() {
     let didFail = false
 
     selections.forEach((selection) => {
-      const toggle = getToggle(editor, selection)
+      const toggle = getToggle(editor, selection, reverse)
 
       if (toggle.new) {
         if (toggle.range && !toggle.selected) {
@@ -162,7 +172,7 @@ function toggle() {
  * @param  selection - The selection in the editor to find a toggle for.
  * @return The result of the toggle operation.
  */
-function getToggle(editor: TextEditor, selection: Selection): Toggle {
+function getToggle(editor: TextEditor, selection: Selection, reverse: boolean = false): Toggle {
   let lineText: string | undefined
 
   let word = editor.document.getText(selection)
@@ -188,7 +198,8 @@ function getToggle(editor: TextEditor, selection: Selection): Toggle {
 
     for (let j = 0; j < words.length; j++) {
       const currentWord = words[j]
-      const nextWordIndex = (j + 1) % words.length
+      const nextWordIndex = reverse ? (j - 1 + words.length) % words.length
+                                    : (j + 1) % words.length
 
       if (!selected && lineText) {
         const regexp = new RegExp(escapeStringRegExp(currentWord), 'ig')

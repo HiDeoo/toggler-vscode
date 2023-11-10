@@ -59,6 +59,11 @@
         "category": "Toggler"
       },
       {
+        "command": "extension.toggle-reverse",
+        "title": "Toggle Reverse",
+        "category": "Toggler"
+      },
+      {
         "command": "extension.toggle.settings",
         "title": "Customize toggles",
         "category": "Toggler"
