@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+### 🚀 New Feature
+
+- Add a new _Toggle Reverse_ command which toggles to the previous word instead of the next one (this command does not have a default keybinding).
+
 ## 0.4.0
 
 ### 🚀 New Feature

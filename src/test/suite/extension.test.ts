@@ -222,4 +222,37 @@ suite('Toggler Test Suite', () => {
       },
     )
   })
+
+  test('should replace known words in reverse order', () => {
+    return withEditor('green', async (document) => {
+      await commands.executeCommand(TogglerCommands.ToggleReverse)
+
+      assertDocumentTextEqual(document, 'fuchsia')
+
+      await commands.executeCommand(TogglerCommands.ToggleReverse)
+
+      assertDocumentTextEqual(document, 'purple')
+
+      await commands.executeCommand(TogglerCommands.ToggleReverse)
+
+      assertDocumentTextEqual(document, 'red')
+
+      await commands.executeCommand(TogglerCommands.ToggleReverse)
+
+      assertDocumentTextEqual(document, 'maroon')
+
+      await commands.executeCommand(TogglerCommands.ToggleReverse)
+
+      assertDocumentTextEqual(document, 'gray')
+
+      await commands.executeCommand(TogglerCommands.ToggleReverse)
+
+      // Asserts this loop back to the end of the list.
+      assertDocumentTextEqual(document, 'aqua')
+
+      await commands.executeCommand(TogglerCommands.ToggleReverse)
+
+      assertDocumentTextEqual(document, 'blue')
+    })
+  })
 })
