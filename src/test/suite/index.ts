@@ -1,6 +1,7 @@
-import * as path from 'path'
-import * as Mocha from 'mocha'
-import * as glob from 'glob'
+import path from 'node:path'
+
+import { globSync } from 'glob'
+import Mocha from 'mocha'
 
 import { getMochaOptions, runTests } from '../mocha'
 
@@ -10,14 +11,12 @@ export function run(): Promise<void> {
 
     const testsRoot = path.resolve(__dirname, '..')
 
-    glob('**/**.test.js', { cwd: testsRoot }, (error, files) => {
-      if (error) {
-        return reject(error)
-      }
+    const files = globSync('**/**.test.js', { cwd: testsRoot })
 
-      files.forEach((f) => mocha.addFile(path.resolve(testsRoot, f)))
+    for (const file of files) {
+      mocha.addFile(path.resolve(testsRoot, file))
+    }
 
-      runTests(mocha, resolve, reject)
-    })
+    runTests(mocha, resolve, reject)
   })
 }

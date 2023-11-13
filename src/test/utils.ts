@@ -1,10 +1,21 @@
+// eslint-disable-next-line unicorn/prefer-node-protocol
 import * as assert from 'assert'
-import { commands, Position, TextDocument, TextEditor, Uri, window, workspace, WorkspaceConfiguration } from 'vscode'
+
+import {
+  commands,
+  Position,
+  type TextDocument,
+  type TextEditor,
+  Uri,
+  window,
+  workspace,
+  type WorkspaceConfiguration,
+} from 'vscode'
 
 /**
  * The test timeout (in milliseconds) to use use during a test modifying the settings.
  */
-const TEST_WITH_CUSTOM_SETTINGS_TIMEOUT = 15000
+const TEST_WITH_CUSTOM_SETTINGS_TIMEOUT = 15_000
 
 /**
  * Runs code in an untitled file editor.
@@ -14,10 +25,10 @@ const TEST_WITH_CUSTOM_SETTINGS_TIMEOUT = 15000
  */
 export async function withEditor(
   content: string,
-  run: (doc: TextDocument, editor: TextEditor) => void,
-  settings?: TestSettings
+  run: (doc: TextDocument, editor: TextEditor) => Promise<void>,
+  settings?: TestSettings,
 ) {
-  const document = await workspace.openTextDocument(Uri.parse('untitled:Toggler'))
+  const document = await workspace.openTextDocument(Uri.parse('untitled:/Toggler'))
   const editor = await window.showTextDocument(document)
 
   let currentSettings: TestSettings | undefined
@@ -78,11 +89,11 @@ async function setTestSettings(settings: TestSettings): Promise<TestSettings> {
         const currentLanguageSettings = await setConfigurationSettings(
           settings,
           workspace.getConfiguration('toggler', { languageId }),
-          languageId
+          languageId,
         )
 
         return [languageId, currentLanguageSettings] as [string, ExtensionSettings]
-      })
+      }),
     )
   }
 
@@ -98,7 +109,7 @@ async function setTestSettings(settings: TestSettings): Promise<TestSettings> {
 async function setConfigurationSettings(
   settings: ExtensionSettings,
   configuration: WorkspaceConfiguration,
-  languageId?: string
+  languageId?: string,
 ): Promise<ExtensionSettings> {
   const currentSettings: ExtensionSettings = {}
 
@@ -126,6 +137,6 @@ interface TestSettings {
  * Settings that can be overridden during a test.
  */
 interface ExtensionSettings {
-  useDefaultToggles?: boolean
-  toggles?: string[][]
+  useDefaultToggles?: boolean | undefined
+  toggles?: string[][] | undefined
 }

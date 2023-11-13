@@ -12,3 +12,6 @@ node_modules/**
 **/*.ts
 .github/**
 .prettierignore
+.eslintcache
+.husky/**
+tsconfig.tsbuildinfo

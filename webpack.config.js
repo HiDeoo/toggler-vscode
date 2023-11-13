@@ -1,6 +1,7 @@
 // @ts-check
 
-const path = require('path')
+const path = require('node:path')
+
 const webpack = require('webpack')
 
 /**@type {import('webpack').Configuration}*/
@@ -21,6 +22,7 @@ module.exports = {
     extensions: ['.ts', '.js'],
     fallback: {
       assert: require.resolve('assert'),
+      stream: false,
     },
   },
   externals: {
