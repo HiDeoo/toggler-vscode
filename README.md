@@ -61,6 +61,7 @@ Toggler is bundled with these default toggles:
   ["inner", "outer"],
   ["left", "right"],
   ["top", "bottom"],
+  ["ltr", "rtl"],
 
   ["black", "white"],
   ["gray", "maroon", "red", "purple", "fuchsia", "green", "yellow", "blue", "aqua"],
@@ -73,6 +74,8 @@ Toggler is bundled with these default toggles:
   ["pop", "push"],
   ["unshift", "shift"],
   ["test.only", "test"],
+  ["describe.only", "describe"],
+  ["interface", "type"],
 
   ["onAnimationStart", "onAnimationEnd"],
   ["onChange", "onInput", "onSubmit"],
@@ -142,7 +145,7 @@ Toggler is bundled with these default toggles:
   ["positive", "negative"],
   ["prefix", "suffix"],
   ["previous", "next"],
-  ["public", "private"],
+  ["public", "private", "protected"],
   ["request", "response"],
   ["req", "res"],
   ["row", "column"],

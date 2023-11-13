@@ -7,6 +7,11 @@ The extension now requires at least [Visual Studio Code 1.74.0 _(November 2022)_
 ### 🚀 New Feature
 
 - Add a new _Toggle Reverse_ command which toggles to the previous word instead of the next one (this command does not have a default keybinding).
+- Add new toggles to the default list:
+  - `describe` → `describe.only`
+  - `public` → `private` → `protected`
+  - `type` → `interface`
+  - `ltr` → `rtl`
 
 ## 0.4.0
 
