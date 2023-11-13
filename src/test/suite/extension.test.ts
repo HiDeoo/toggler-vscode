@@ -1,4 +1,4 @@
-import { commands, Position, Selection, window } from 'vscode'
+import { commands, Position, Selection } from 'vscode'
 
 import { TogglerCommands } from '../../extension'
 import { withEditor, assertDocumentTextEqual, testWithCustomSettings } from '../utils'
@@ -70,7 +70,7 @@ suite('Toggler Test Suite', () => {
 
         assertDocumentTextEqual(document, 'NaN')
       },
-      { global: { toggles: [['NaN', 'null', 'undefined']] } }
+      { global: { toggles: [['NaN', 'null', 'undefined']] } },
     )
   })
 
@@ -90,7 +90,7 @@ suite('Toggler Test Suite', () => {
 
         assertDocumentTextEqual(document, 'trim')
       },
-      { global: { toggles: [['trim', 'trimStart', 'trimEnd']] } }
+      { global: { toggles: [['trim', 'trimStart', 'trimEnd']] } },
     )
   })
 
@@ -186,7 +186,7 @@ suite('Toggler Test Suite', () => {
 
         assertDocumentTextEqual(document, 'true')
       },
-      { global: { useDefaultToggles: false } }
+      { global: { useDefaultToggles: false } },
     )
   })
 
@@ -201,7 +201,7 @@ suite('Toggler Test Suite', () => {
       {
         global: { toggles: [['aaa', 'bbb']] },
         language: [['json', { toggles: [['aaa', 'ccc']] }]],
-      }
+      },
     )
   })
 
@@ -219,7 +219,7 @@ suite('Toggler Test Suite', () => {
           ['plaintext', { toggles: [['aaa', 'ccc']] }],
           ['json', { toggles: [['aaa', 'ddd']] }],
         ],
-      }
+      },
     )
   })
 })

@@ -1,6 +1,6 @@
-import { commands, ExtensionContext, Range, Selection, TextEditor, window, workspace } from 'vscode'
+import { commands, type ExtensionContext, Range, type Selection, type TextEditor, window, workspace } from 'vscode'
 
-import * as defaults from './defaults.json'
+import defaults from './defaults.json'
 
 /**
  * Toggler command identifiers.
@@ -13,7 +13,7 @@ export const TogglerCommands = {
 /**
  * RegExp special characters.
  */
-const RegExpCharacters = /[|\\{}()[\]^$+*?.]/g
+const RegExpCharacters = /[$()*+.?[\\\]^{|}]/g
 
 /**
  * Toggler configuration.
@@ -42,7 +42,7 @@ export function activate(context: ExtensionContext) {
       if (event.affectsConfiguration('toggler')) {
         resetConfiguration()
       }
-    })
+    }),
   )
 }
 
@@ -70,7 +70,7 @@ function loadConfiguration() {
 
   const languageId = window.activeTextEditor.document.languageId
 
-  if (configuration && configuration[languageId]) {
+  if (configuration?.[languageId]) {
     return
   }
 
@@ -80,7 +80,7 @@ function loadConfiguration() {
 
   let customToggles: ToggleConfiguration[] = []
 
-  const togglerConfiguration = workspace.getConfiguration('toggler', window.activeTextEditor?.document)
+  const togglerConfiguration = workspace.getConfiguration('toggler', window.activeTextEditor.document)
 
   const useDefaultToggles = togglerConfiguration.get<boolean>('useDefaultToggles', true)
   const customTogglesInfos = togglerConfiguration.inspect<ToggleConfiguration[]>('toggles')
@@ -93,14 +93,14 @@ function loadConfiguration() {
     }
   }
 
-  configuration[languageId] = useDefaultToggles ? customToggles.concat(defaults) : customToggles
+  configuration[languageId] = useDefaultToggles ? [...customToggles, ...defaults] : customToggles
 }
 
 /**
  * Opens the Toggler settings.
  */
 function openTogglerSettings() {
-  commands.executeCommand('workbench.action.openSettings', '@ext:hideoo.toggler')
+  void commands.executeCommand('workbench.action.openSettings', '@ext:hideoo.toggler')
 }
 
 /**
@@ -118,7 +118,7 @@ function toggle() {
   return editor.edit(async (editBuilder) => {
     let didFail = false
 
-    selections.forEach((selection) => {
+    for (const selection of selections) {
       const toggle = getToggle(editor, selection)
 
       if (toggle.new) {
@@ -132,7 +132,7 @@ function toggle() {
       } else {
         didFail = true
       }
-    })
+    }
 
     if (didFail) {
       const togglerConfiguration = workspace.getConfiguration('toggler', window.activeTextEditor?.document)
@@ -146,7 +146,7 @@ function toggle() {
 
       const result = await window.showWarningMessage(
         `Toggler: Could not find a toggle. You can add one in your VS Code settings.`,
-        settingsButton
+        settingsButton,
       )
 
       if (result === settingsButton) {
@@ -173,7 +173,7 @@ function getToggle(editor: TextEditor, selection: Selection): Toggle {
     selected,
   }
 
-  if (!configuration || !configuration[editor.document.languageId]) {
+  if (!configuration?.[editor.document.languageId]) {
     return toggle
   }
 
@@ -183,11 +183,14 @@ function getToggle(editor: TextEditor, selection: Selection): Toggle {
     lineText = editor.document.lineAt(cursorPosition).text
   }
 
-  for (let i = 0; i < languageConfiguration.length; i++) {
-    const words = languageConfiguration[i]
-
+  for (const words of languageConfiguration ?? []) {
     for (let j = 0; j < words.length; j++) {
       const currentWord = words[j]
+
+      if (!currentWord) {
+        continue
+      }
+
       const nextWordIndex = (j + 1) % words.length
 
       if (!selected && lineText) {
@@ -212,6 +215,11 @@ function getToggle(editor: TextEditor, selection: Selection): Toggle {
 
       if (word.toLowerCase() === lowerCaseCurrentWord) {
         const nextWord = words[nextWordIndex]
+
+        if (!nextWord) {
+          return toggle
+        }
+
         const nextWordHasUppercase = /[A-Z]/.test(nextWord)
 
         if (!nextWordHasUppercase && word === lowerCaseCurrentWord) {
@@ -248,7 +256,7 @@ function capitalize(aString: string) {
  * @see https://github.com/sindresorhus/escape-string-regexp
  */
 function escapeStringRegExp(aString: string) {
-  return aString.replace(RegExpCharacters, '\\$&')
+  return aString.replaceAll(RegExpCharacters, '\\$&')
 }
 
 /**
@@ -259,7 +267,7 @@ type ToggleConfiguration = string[]
 /**
  * Toggle operation result.
  */
-type Toggle = {
+interface Toggle {
   // Defines if the toggle is based on a user selection or guessed on a cursor position.
   selected: boolean
   // Range of the toggled words when the toggle is based on a cursor position.

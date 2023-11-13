@@ -1,16 +1,9 @@
 {
+  "extends": "@hideoo/tsconfig",
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "out",
-    "lib": ["es6"],
-    "sourceMap": true,
-    "rootDir": "src",
-    "strict": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedParameters": true,
-    "resolveJsonModule": true
-  },
-  "exclude": ["node_modules", ".vscode-test"]
+    "verbatimModuleSyntax": false
+  }
 }
