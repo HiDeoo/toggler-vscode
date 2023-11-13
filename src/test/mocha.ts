@@ -7,9 +7,9 @@ export function runTests(mocha: Mocha | BrowserMocha, resolve: () => void, rejec
         resolve()
       }
     })
-  } catch (err) {
-    console.error(err)
-    reject(err)
+  } catch (error) {
+    console.error(error)
+    reject(error)
   }
 }
 
