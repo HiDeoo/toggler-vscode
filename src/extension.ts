@@ -34,7 +34,7 @@ export function activate(context: ExtensionContext) {
 
       loadConfiguration()
 
-      return toggle()
+      return toggle('forward')
     }),
     commands.registerCommand(TogglerCommands.ToggleReverse, () => {
       if (!window.activeTextEditor) {
@@ -43,7 +43,7 @@ export function activate(context: ExtensionContext) {
 
       loadConfiguration()
 
-      return toggle(true)
+      return toggle('backward')
     }),
     commands.registerCommand(TogglerCommands.Settings, () => {
       openTogglerSettings()
@@ -115,8 +115,9 @@ function openTogglerSettings() {
 
 /**
  * Toggles words.
+ * @param  direction - The direction of the toggle.
  */
-function toggle(reverse = false) {
+function toggle(direction: TogglerDirection) {
   const editor = window.activeTextEditor
 
   if (!editor) {
@@ -129,7 +130,7 @@ function toggle(reverse = false) {
     let didFail = false
 
     for (const selection of selections) {
-      const toggle = getToggle(editor, selection, reverse)
+      const toggle = getToggle(editor, selection, direction)
 
       if (toggle.new) {
         if (toggle.range && !toggle.selected) {
@@ -170,9 +171,10 @@ function toggle(reverse = false) {
  * Returns the result of a toggle operation.
  * @param  editor - The TextEditor instance.
  * @param  selection - The selection in the editor to find a toggle for.
+ * @param  direction - The direction of the toggle.
  * @return The result of the toggle operation.
  */
-function getToggle(editor: TextEditor, selection: Selection, reverse = false): Toggle {
+function getToggle(editor: TextEditor, selection: Selection, direction: TogglerDirection): Toggle {
   let lineText: string | undefined
 
   let word = editor.document.getText(selection)
@@ -201,7 +203,7 @@ function getToggle(editor: TextEditor, selection: Selection, reverse = false): T
         continue
       }
 
-      const nextWordIndex = reverse ? (j - 1 + words.length) % words.length : (j + 1) % words.length
+      const nextWordIndex = direction === 'backward' ? (j - 1 + words.length) % words.length : (j + 1) % words.length
 
       if (!selected && lineText) {
         const regexp = new RegExp(escapeStringRegExp(currentWord), 'ig')
@@ -285,3 +287,8 @@ interface Toggle {
   // The new word if any.
   new?: string
 }
+
+/**
+ * Toggler direction.
+ */
+type TogglerDirection = 'forward' | 'backward'
