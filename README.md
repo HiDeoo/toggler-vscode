@@ -34,7 +34,7 @@ Set your cursor on a word or select a word and press the associated keybinding (
 
 You can also use the VS Code Command Palette and choose the `Toggle` command, or use the `Toggle` action in a context menu.
 
-## Configuration.
+## Configuration
 
 You can customize the default configuration directly in your VS Code settings:
 
