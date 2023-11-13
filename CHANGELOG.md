@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+The extension now requires at least [Visual Studio Code 1.74.0 _(November 2022)_](https://code.visualstudio.com/updates/v1_74).
+
 ### 🚀 New Feature
 
 - Add a new _Toggle Reverse_ command which toggles to the previous word instead of the next one (this command does not have a default keybinding).
