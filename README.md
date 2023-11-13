@@ -1,25 +1,28 @@
 <div align="center">
-  <h1>Toggler 🖇️</h1>
-  <p>Toggle words and symbols in VS Code using a user defined configuration</p>
+  <img alt="Toggler extension icon" src="https://i.imgur.com/LfHZMK4.png" width="128" />
+  <h1>Toggler</h1>
 </div>
 
 <div align="center">
-  <a href="https://github.com/HiDeoo/toggler-vscode/actions?query=workflow%3Aintegration"><img alt="Integration Status" src="https://github.com/HiDeoo/toggler-vscode/workflows/integration/badge.svg"></a>
-  <a href="https://github.com/HiDeoo/toggler-vscode/blob/main/LICENSE.md">
-    <img alt="License" src="https://badgen.net/github/license/hideoo/toggler-vscode" />
-  </a>
-  <br /><br />
+  <p><strong>Toggle words and symbols in VS Code using a user defined configuration.</strong></p>
+  <p>
+    <a href="https://github.com/HiDeoo/toggler-vscode/actions?query=workflow%3Aintegration">
+      <img alt="Integration Status" src="https://github.com/HiDeoo/toggler-vscode/workflows/integration/badge.svg">
+    </a>
+    <a href="https://github.com/HiDeoo/toggler-vscode/blob/main/LICENSE.md">
+      <img alt="License" src="https://badgen.net/github/license/hideoo/toggler-vscode" />
+    </a>
+  </p>
+  <p>
+    <a href="https://i.imgur.com/mBAqejd.gif" title="Demo of the Toggler extension">
+      <img alt="Demo of the Toggler extension" src="https://i.imgur.com/mBAqejd.gif" width="458" />
+    </a>
+  </p>
 </div>
-
-This is the official port of the [Atom package](https://atom.io/packages/toggler) of the same name.
-
-![Screenshot of the Toggler Extension](https://i.imgur.com/iozE1kZ.gif)
-
-[Changelog](https://github.com/HiDeoo/toggler-vscode/blob/master/CHANGELOG.md)
 
 ## Features
 
-As none of the existing words toggling package were fitting my needs, I decided to write my own with the following features:
+A word and symbol toggling extension for Visual Studio Code with the following features:
 
 - **Easily user customizable.**
 - Maintain word case.
@@ -32,23 +35,23 @@ As none of the existing words toggling package were fitting my needs, I decided 
 
 Set your cursor on a word or select a word and press the associated keybinding (<kbd>Ctrl</kbd>+<kbd>r</kbd> by default on macOS, <kbd>Alt</kbd>+<kbd>r</kbd> on Windows and Linux).
 
-You can also use the VS Code Command Palette and choose the `Toggle` command, or use the `Toggle` action in a context menu.
+You can also use the VS Code Command Palette and choose the `Toggle` command, or use the `Toggle` action in a context menu. A `Toggle Reverse` command is also available to toggle to the previous word instead of the next one.
 
-## Configuration.
+## Configuration
 
-You can customize the default configuration directly in your VS Code settings:
+You can customize the default configuration directly in your VS Code settings or using the `Customize toggles` command:
 
 ```json
 "toggler.toggles": [
-    [
-      "custom_1",
-      "custom_2"
-    ],
-    [
-      "custom_3",
-      "custom_4"
-    ]
+  [
+    "custom_1",
+    "custom_2"
+  ],
+  [
+    "custom_3",
+    "custom_4"
   ]
+]
 ```
 
 Toggler is bundled with these default toggles:
@@ -61,6 +64,7 @@ Toggler is bundled with these default toggles:
   ["inner", "outer"],
   ["left", "right"],
   ["top", "bottom"],
+  ["ltr", "rtl"],
 
   ["black", "white"],
   ["gray", "maroon", "red", "purple", "fuchsia", "green", "yellow", "blue", "aqua"],
@@ -73,6 +77,8 @@ Toggler is bundled with these default toggles:
   ["pop", "push"],
   ["unshift", "shift"],
   ["test.only", "test"],
+  ["describe.only", "describe"],
+  ["interface", "type"],
 
   ["onAnimationStart", "onAnimationEnd"],
   ["onChange", "onInput", "onSubmit"],
@@ -142,7 +148,7 @@ Toggler is bundled with these default toggles:
   ["positive", "negative"],
   ["prefix", "suffix"],
   ["previous", "next"],
-  ["public", "private"],
+  ["public", "private", "protected"],
   ["request", "response"],
   ["req", "res"],
   ["row", "column"],
