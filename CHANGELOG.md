@@ -1,5 +1,17 @@
 # Change Log
 
+## 0.6.0
+
+### 🚀 New Feature
+
+- Add new toggles to the default list:
+  - `dark` → `light`
+  - `and` → `or`
+- Update the following toggles from the default list:
+  - `start` → `stop` → `end` (`end` is new)
+  - `minor` → `major` → `patch` (`patch` is new)
+  - `x` → `y` → `z` (`z` is new)
+
 ## 0.5.0
 
 The extension now requires at least [Visual Studio Code 1.74.0 _(November 2022)_](https://code.visualstudio.com/updates/v1_74).
