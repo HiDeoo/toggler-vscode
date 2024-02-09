@@ -1,4 +1,5 @@
 [
+  ["start", "stop", "end"],
   ["absolute", "relative"],
   ["high", "low"],
   ["horizontal", "vertical"],
@@ -9,6 +10,7 @@
 
   ["black", "white"],
   ["gray", "maroon", "red", "purple", "fuchsia", "green", "yellow", "blue", "aqua"],
+  ["dark", "light"],
 
   ["const", "let", "var"],
   ["import", "export"],
@@ -82,7 +84,7 @@
   ["all", "each", "only"],
   ["key", "value"],
   ["unload", "load"],
-  ["minor", "major"],
+  ["minor", "major", "patch"],
   ["online", "offline"],
   ["open", "close"],
   ["parent", "child"],
@@ -96,11 +98,10 @@
   ["short", "long"],
   ["show", "hide"],
   ["source", "destination"],
-  ["start", "stop"],
   ["invalid", "valid"],
   ["visible", "hidden"],
   ["width", "height"],
-  ["x", "y"],
+  ["x", "y", "z"],
 
   ["0", "1"],
   ["enabled", "disabled"],
@@ -109,6 +110,7 @@
   ["on", "off"],
   ["true", "false"],
   ["yes", "no"],
+  ["and", "or"],
 
   ["div", "span"],
   ["head", "body"],
