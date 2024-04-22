@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+### 🚀 New Feature
+
+- Add support for [workspace specific](https://code.visualstudio.com/docs/getstarted/settings#_workspace-settings) custom toggles.
+
 ## 0.6.0
 
 ### 🚀 New Feature

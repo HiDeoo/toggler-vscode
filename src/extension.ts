@@ -96,10 +96,21 @@ function loadConfiguration() {
   const customTogglesInfos = togglerConfiguration.inspect<ToggleConfiguration[]>('toggles')
 
   if (customTogglesInfos) {
-    if (customTogglesInfos.globalLanguageValue) {
-      customToggles = customTogglesInfos.globalLanguageValue
-    } else if (customTogglesInfos.globalValue) {
-      customToggles = customTogglesInfos.globalValue
+    const customTogglesLanguageInfos = [
+      ...(customTogglesInfos.globalLanguageValue ?? []),
+      ...(customTogglesInfos.workspaceLanguageValue ?? []),
+      ...(customTogglesInfos.workspaceFolderLanguageValue ?? []),
+    ]
+    const customTogglesLanguageGenericInfos = [
+      ...(customTogglesInfos.globalValue ?? []),
+      ...(customTogglesInfos.workspaceValue ?? []),
+      ...(customTogglesInfos.workspaceFolderValue ?? []),
+    ]
+
+    if (customTogglesLanguageInfos.length > 0) {
+      customToggles = customTogglesLanguageInfos
+    } else if (customTogglesLanguageGenericInfos.length > 0) {
+      customToggles = customTogglesLanguageGenericInfos
     }
   }
 
