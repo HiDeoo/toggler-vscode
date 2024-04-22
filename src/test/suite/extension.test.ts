@@ -1,4 +1,4 @@
-import { commands, Position, Selection } from 'vscode'
+import { commands, Position, Selection, Uri, window, workspace } from 'vscode'
 
 import { TogglerCommands } from '../../extension'
 import { withEditor, assertDocumentTextEqual, testWithCustomSettings } from '../utils'
@@ -254,5 +254,23 @@ suite('Toggler Test Suite', () => {
 
       assertDocumentTextEqual(document, 'blue')
     })
+  })
+
+  test('should use a workspace specific custom toggle', async () => {
+    const workspaceFolder = workspace.workspaceFolders?.[0]
+
+    if (!workspaceFolder) {
+      // Skipping the test on the web extension.
+      return
+    }
+
+    const document = await workspace.openTextDocument(
+      Uri.file(`${workspace.workspaceFolders?.[0]?.uri.fsPath}/test.txt`),
+    )
+    await window.showTextDocument(document)
+
+    await commands.executeCommand(TogglerCommands.Toggle)
+
+    assertDocumentTextEqual(document, 'ppp\n')
   })
 })
